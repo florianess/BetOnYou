@@ -190,6 +190,51 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Retrieve stats from a particular player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/players/1/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"players",
+						"1",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve stats from a game for a particular player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/players/1/stats/game2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"players",
+						"1",
+						"stats",
+						"game2"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

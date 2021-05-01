@@ -1,3 +1,5 @@
+import json
+
 from app import db
 from models.Player import Player
 from services import ClashRoyale, Fortnite
@@ -32,6 +34,7 @@ def update_clash_royale(_id, battletag):
     player_to_update = Player.query.filter_by(id=_id).first()
     player_to_update.id_game1 = battletag
     player_to_update.username_game1 = player_info['name']
+    player_to_update.stats_game1 = json.dumps(player_info)
     db.session.commit()
     player_matches = ClashRoyale.get_player_matches(battletag)
     return {'info': player_info, 'matches': player_matches}
@@ -43,6 +46,14 @@ def update_fortnite(_id, username):
     player_to_update = Player.query.filter_by(id=_id).first()
     player_to_update.id_game2 = player_info['id']
     player_to_update.username_game2 = player_info['name']
+    player_to_update.stats_game2 = json.dumps(player_info['global_stats'])
     db.session.commit()
     player_matches = Fortnite.get_player_matches(player_info['id'])
     return {'info': player_info, 'matches': player_matches}
+
+def get_stats(_id):
+    return Player.stats(Player.query.filter_by(id=_id).first())
+
+def get_stats_game(_id, _game):
+    all_stats = get_stats(_id)
+    return all_stats[_game]

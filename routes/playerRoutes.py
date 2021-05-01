@@ -48,3 +48,11 @@ def update_player_game_2(id):
         response = Response("Username invalid", 404)
         return response
     return jsonify(player_info)
+
+@playerRoutes.route('/<int:id>/stats', methods=['GET'])
+def stats_player(id):
+    return jsonify(playerController.get_stats(id))
+
+@playerRoutes.route('/<int:id>/stats/<string:game>', methods=['GET'])
+def stats_player_game(id, game):
+    return jsonify(playerController.get_stats_game(id, game))

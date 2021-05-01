@@ -1,3 +1,5 @@
+import json
+
 from app import db
 
 class Player(db.Model):
@@ -8,8 +10,10 @@ class Player(db.Model):
     lastname = db.Column(db.String, nullable=False)
     id_game1 = db.Column(db.String, unique=True)
     username_game1 = db.Column(db.String, unique=True)
+    stats_game1 = db.Column(db.String)
     id_game2 = db.Column(db.String, unique=True)
     username_game2 = db.Column(db.String, unique=True)
+    stats_game2 = db.Column(db.String)
     active = db.Column(db.Boolean)
 
     def __repr__(self):
@@ -27,4 +31,10 @@ class Player(db.Model):
             'id_game2': self.id_game2,
             'username_game2': self.username_game2,
             'active': self.active,
+        }
+    
+    def stats(self):
+        return {
+            'game1': json.loads(self.stats_game1) if self.stats_game1 else {},
+            'game2': json.loads(self.stats_game2) if self.stats_game2 else {},
         }
