@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c4a0d505-e0fb-4a2b-a71b-3d92cf4f1b09",
+		"_postman_id": "7744f525-7fc9-498e-976d-fb07586186ce",
 		"name": "BetOnYou Florian",
 		"description": "Bet On You Exercice by Florian",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -8,21 +8,9 @@
 	"item": [
 		{
 			"name": "Retrieve all the players",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"toto\",\r\n    \"username\": \"toto\",\r\n    \"firstname\": \"toto\",\r\n    \"lastname\": \"toto\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "http://localhost:5000/api/players/",
 					"protocol": "http",
@@ -140,7 +128,68 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Updating a player clash royale",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"battletag\": \"GYUQQCLV\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/players/1/clash_royale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"players",
+						"1",
+						"clash_royale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating a player fortnite",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Ninja\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/players/1/fortnite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"players",
+						"1",
+						"fortnite"
+					]
+				}
+			},
+			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

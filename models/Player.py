@@ -6,7 +6,9 @@ class Player(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     firstname = db.Column(db.String, nullable=False)
     lastname = db.Column(db.String, nullable=False)
+    id_game1 = db.Column(db.String, unique=True)
     username_game1 = db.Column(db.String, unique=True)
+    id_game2 = db.Column(db.String, unique=True)
     username_game2 = db.Column(db.String, unique=True)
     active = db.Column(db.Boolean)
 
@@ -20,7 +22,9 @@ class Player(db.Model):
             'username': self.username,
             'firstname': self.firstname,
             'lastname': self.lastname,
+            'id_game1': self.id_game1,
             'username_game1': self.username_game1,
+            'id_game2': self.id_game2,
             'username_game2': self.username_game2,
             'active': self.active,
         }

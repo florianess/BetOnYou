@@ -30,3 +30,21 @@ def update(id):
     playerController.update(id, data['email'], data['username'], data['firstname'], data['lastname'])
     response = Response("Player updated", 200)
     return response
+
+@playerRoutes.route('/<int:id>/clash_royale', methods=['PUT'])
+def update_player_game_1(id):
+    data = request.get_json()
+    player_info = playerController.update_clash_royale(id, data['game_id'])
+    if (player_info is None):
+        response = Response("Game Id invalid", 404)
+        return response
+    return jsonify(player_info)
+
+@playerRoutes.route('/<int:id>/fortnite', methods=['PUT'])
+def update_player_game_2(id):
+    data = request.get_json()
+    player_info = playerController.update_fortnite(id, data['username'])
+    if (player_info is None):
+        response = Response("Username invalid", 404)
+        return response
+    return jsonify(player_info)
