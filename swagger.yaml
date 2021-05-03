@@ -1,0 +1,289 @@
+swagger: "2.0"
+info:
+  description: "Documentation of the BetOnYou API by Florian"
+  version: "1.0.0"
+  title: "Swagger BetOnYou Florian"
+host: "localhost:5000"
+basePath: "/api"
+tags:
+- name: "Player"
+  description: "Operations about player"
+schemes:
+- "http"
+paths:
+  /players:
+    post:
+      tags:
+      - "Player"
+      summary: "Add a new player"
+      description: ""
+      operationId: "addPlayer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/PlayerInput"
+      responses:
+        "201":
+          description: "Player added"
+      
+    get:
+      tags:
+      - "Player"
+      summary: "Retrieve all the players"
+      description: ""
+      operationId: "getPlayers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Player"
+  /players/{playerId}:
+    get:
+      tags:
+      - "Player"
+      summary: "Retrieve a particular player"
+      description: "Returns a single player"
+      operationId: "getPlayerById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "ID of player to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Player"
+    put:
+      tags:
+      - "Player"
+      summary: "Updating a player's information"
+      description: ""
+      operationId: "updatePlayer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "ID of player to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/PlayerInput"
+      responses:
+        "200":
+          description: "Player updated"
+    delete:
+      tags:
+      - "Player"
+      summary: "Deleting a player"
+      description: ""
+      operationId: "deletePlayer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "Player to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Player delete"
+  /players/{playerId}/clash_royale:
+    put:
+      tags:
+      - "Player"
+      summary: "Updating a player clash royale account"
+      description: ""
+      operationId: "updatePlayerClashRoyale"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "ID of player to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          type: "object"
+          properties:
+            game_id:
+              type: "string"
+              example: "GYUQQCLV"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GameStats"
+  /players/{playerId}/fortnite:
+    put:
+      tags:
+      - "Player"
+      summary: "Updating a player fortnite account"
+      description: ""
+      operationId: "updatePlayerFornite"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "ID of player to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          type: "object"
+          properties:
+            username:
+              type: "string"
+              example: "Ninja"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GameStats"
+  /players/{playerId}/stats:
+    get:
+      tags:
+      - "Player"
+      summary: "Retrieve stats from a particular player"
+      description: ""
+      operationId: "getPlayerByIdStats"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "ID of player to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlayerStats"
+  /players/{playerId}/stats/{gameId}:
+    get:
+      tags:
+      - "Player"
+      summary: "Retrieve stats from a game for a particular player"
+      description: ""
+      operationId: "getPlayerByIdGameStats"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "playerId"
+        in: "path"
+        description: "ID of player to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "gameId"
+        in: "path"
+        description: "ID of game to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GameStats"
+definitions:
+  PlayerInput:
+    type: "object"
+    required:
+    - "firstname"
+    - "lastname"
+    - "username"
+    - "email"
+    properties:
+      username:
+        type: "string"
+        example: "jojo"
+      email:
+        type: "string"
+        example: "john@doe.com"
+      firstname:
+        type: "string"
+        example: "John"
+      lastname:
+        type: "string"
+        example: "Doe"
+  Player:
+    type: "object"
+    required:
+    - "firstname"
+    - "lastname"
+    - "username"
+    - "email"
+    properties:
+      username:
+        type: "string"
+        example: "jojo"
+      email:
+        type: "string"
+        example: "john@doe.com"
+      firstname:
+        type: "string"
+        example: "John"
+      lastname:
+        type: "string"
+        example: "Doe"
+      username_game1:
+        type: "string"
+        example: "Jojodoe"
+      id_game1:
+        type: "string"
+        example: "GEF4VC"
+      username_game2:
+        type: "string"
+        example: "Jojodoe"
+      id_game2:
+        type: "string"
+        example: "1283048234"
+  PlayerStats:
+    type: "object"
+    properties:
+      game1:
+        $ref: "#/definitions/GameStats"
+      game2:
+        $ref: "#/definitions/GameStats"
+  GameStats:
+    type: "object"
