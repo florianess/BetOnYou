@@ -1,0 +1,287 @@
+openapi: 3.0.1
+info:
+  title: Swagger BetOnYou Florian
+  description: Documentation of the BetOnYou API by Florian
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api
+tags:
+  - name: Player
+    description: Operations about player
+paths:
+  /players:
+    get:
+      tags:
+        - Player
+      summary: Retrieve all the players
+      operationId: getPlayers
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Player"
+    post:
+      tags:
+        - Player
+      summary: Add a new player
+      operationId: addPlayer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerInput"
+        required: true
+      responses:
+        201:
+          description: Player added
+          content: {}
+      x-codegen-request-body-name: body
+  /players/{playerId}:
+    get:
+      tags:
+        - Player
+      summary: Retrieve a particular player
+      description: Returns a single player
+      operationId: getPlayerById
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+    put:
+      tags:
+        - Player
+      summary: Updating a player's information
+      operationId: updatePlayer
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerInput"
+        required: true
+      responses:
+        200:
+          description: Player updated
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - Player
+      summary: Deleting a player
+      operationId: deletePlayer
+      parameters:
+        - name: playerId
+          in: path
+          description: Player to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Player delete
+          content: {}
+  /players/{playerId}/clash_royale:
+    put:
+      tags:
+        - Player
+      summary: Updating a player clash royale account
+      operationId: updatePlayerClashRoyale
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                game_id:
+                  type: string
+                  example: GYUQQCLV
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStats"
+      x-codegen-request-body-name: body
+  /players/{playerId}/fortnite:
+    put:
+      tags:
+        - Player
+      summary: Updating a player fortnite account
+      operationId: updatePlayerFornite
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Ninja
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStats"
+      x-codegen-request-body-name: body
+  /players/{playerId}/stats:
+    get:
+      tags:
+        - Player
+      summary: Retrieve stats from a particular player
+      operationId: getPlayerByIdStats
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerStats"
+  /players/{playerId}/stats/{gameId}:
+    get:
+      tags:
+        - Player
+      summary: Retrieve stats from a game for a particular player
+      operationId: getPlayerByIdGameStats
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: gameId
+          in: path
+          description: Name of the game (game1 or game2)
+          required: true
+          schema:
+            type: string
+            enum: [game1, game2]
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStats"
+components:
+  schemas:
+    PlayerInput:
+      required:
+        - email
+        - firstname
+        - lastname
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: jojo
+        email:
+          type: string
+          example: john@doe.com
+        firstname:
+          type: string
+          example: John
+        lastname:
+          type: string
+          example: Doe
+    Player:
+      required:
+        - email
+        - firstname
+        - lastname
+        - username
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: jojo
+        email:
+          type: string
+          example: john@doe.com
+        firstname:
+          type: string
+          example: John
+        lastname:
+          type: string
+          example: Doe
+        username_game1:
+          type: string
+          example: Jojodoe
+        id_game1:
+          type: string
+          example: GEF4VC
+        username_game2:
+          type: string
+          example: Jojodoe
+        id_game2:
+          type: string
+          example: "1283048234"
+        active:
+          type: boolean
+          example: true
+    PlayerStats:
+      type: object
+      properties:
+        game1:
+          $ref: "#/components/schemas/GameStats"
+        game2:
+          $ref: "#/components/schemas/GameStats"
+    GameStats:
+      type: object

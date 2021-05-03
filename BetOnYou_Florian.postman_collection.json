@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/players/",
+					"raw": "http://localhost:5000/api/players",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -20,8 +20,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"players",
-						""
+						"players"
 					]
 				}
 			},
@@ -106,7 +105,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"titi\",\r\n    \"username\": \"titi\",\r\n    \"firstname\": \"toto\",\r\n    \"lastname\": \"toto\"\r\n}",
+					"raw": "{\r\n    \"email\": \"ffff\",\r\n    \"username\": \"titfffff\",\r\n    \"firstname\": \"toto\",\r\n    \"lastname\": \"toto\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -114,7 +113,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/players/",
+					"raw": "http://localhost:5000/api/players",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -122,8 +121,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"players",
-						""
+						"players"
 					]
 				}
 			},

@@ -20,6 +20,9 @@ class Player(db.Model):
         return '<Player %r>' % self.id
     
     def json(self):
+        """
+        Return format player to Object
+        """
         return {
             'id': self.id,
             'email': self.email,
@@ -34,6 +37,9 @@ class Player(db.Model):
         }
     
     def stats(self):
+        """
+        Return format statistics of player
+        """
         return {
             'game1': json.loads(self.stats_game1) if self.stats_game1 else {},
             'game2': json.loads(self.stats_game2) if self.stats_game2 else {},

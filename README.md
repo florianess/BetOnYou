@@ -4,6 +4,7 @@
 
 ```
 📦BetOnYou
+ ┣ 📂controllers
  ┃ ┣ 📜playerController.py                          Player controller
  ┃ ┗ 📜__init__.p
  ┣ 📂models
@@ -16,6 +17,8 @@
  ┃ ┣ 📜ClashRoyale.py                               Connection with Clash Royale API
  ┃ ┣ 📜Fortnite.py                                  Connection with Fornite API
  ┃ ┗ 📜__init__.py
+ ┣ 📂static
+ ┃ ┗ 📜swagger.yaml                                 Swagger YAML file
  ┣ 📂tests
  ┃ ┣ 📜testPlayer.py                                Unit tests for the player route
  ┃ ┗ 📜__init__.py
@@ -64,6 +67,8 @@ python -m unittest
 ```
 
 ## How to use the API
+
+The swagger UI is accessible on localhost:5000/api/docs
 
 ### Get all players (in python)
 

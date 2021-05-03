@@ -3,11 +3,11 @@ from controllers import playerController
 
 playerRoutes = Blueprint('playerRoutes', __name__)
 
-@playerRoutes.route('/', methods=['GET'])
+@playerRoutes.route('', methods=['GET'])
 def getAll():
     return jsonify(playerController.get_all())
 
-@playerRoutes.route('/', methods=['POST'])
+@playerRoutes.route('', methods=['POST'])
 def add():
     data = request.get_json()
     playerController.add(data['email'], data['username'], data['firstname'], data['lastname'])

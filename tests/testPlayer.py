@@ -12,24 +12,33 @@ class PlayerTest(unittest.TestCase):
         self.db.create_all()
     
     def test_get_all(self):
+        """
+        Test the route GET /api/players
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
-        response = self.app.get('/api/players/')
+        response = self.app.get('/api/players')
         self.assertEqual(200, response.status_code)
         self.assertEqual(1, len(response.get_json()))
     
     def test_post(self):
+        """
+        Test the route POST /api/players to create a player
+        """
         payload = json.dumps({
             "email": "john@doe.com",
             "username": "johndoe",
             "firstname": "john",
             "lastname": "doe"
         })
-        response = self.app.post('/api/players/', headers={"Content-Type": "application/json"}, data=payload)
+        response = self.app.post('/api/players', headers={"Content-Type": "application/json"}, data=payload)
         self.assertEqual(201, response.status_code)
 
     def test_get_by_id(self):
+        """
+        Test the route GET /api/players/:id
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
@@ -39,6 +48,9 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual("jojo", player['username'])
 
     def test_update(self):
+        """
+        Test the route PUT /api/players/:id to update a player
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
@@ -54,6 +66,9 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual("doe@john.com", player.email)
 
     def test_delete(self):
+        """
+        Test the route DELETE /api/players/:id
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
@@ -63,6 +78,9 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual(0, len(players))
     
     def test_update_clash_royale(self):
+        """
+        Test the route PUT /api/players/:id/clash_royale to add stats from Clash Royale
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
@@ -77,6 +95,9 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual('GYUQQCLV', player.id_game1)
 
     def test_update_wrong_clash_royale(self):
+        """
+        Test the route PUT /api/players/:id/clash_royale to add stats from Clash Royale with wrong game_id
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
@@ -90,6 +111,9 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual(None, player.id_game1)
 
     def test_update_fortnite(self):
+        """
+        Test the route PUT /api/players/:id/clash_royale to add stats from Fortnite
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
@@ -104,6 +128,9 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual('Ninja', player.username_game2)
 
     def test_update_wrong_fortnite(self):
+        """
+        Test the route PUT /api/players/:id/clash_royale to add stats from Fortnite with wrong username
+        """
         new_player = Player(email="john@doe.com", username="jojo", firstname="john", lastname="doe")
         self.db.session.add(new_player)
         self.db.session.commit()
